@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import { handleGetInitialData } from "../actions/shared";
 import Dashboard from "./Dashboard";
 import NewTweet from "./NewTweet";
+import TweetPage from "./TweetPage";
 import LoadingBar from "react-redux-loading";
 import { Route, BrowserRouter as Router } from "react-router-dom";
+import NavBar from "./NavBar";
 
 class App extends Component {
   componentDidMount() {
@@ -20,9 +22,11 @@ class App extends Component {
           ? null
           :
           <Router>
-            <div>
+            <div className='container'>
+              <NavBar/>
               <Route exact path='/' component={Dashboard}/>
               <Route path='/new' component={NewTweet}/>
+              <Route path='/tweet/:id' component={TweetPage}/>
             </div>
           </Router>
         }

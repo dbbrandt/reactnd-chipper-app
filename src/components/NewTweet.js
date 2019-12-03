@@ -30,8 +30,7 @@ class NewTweet extends Component {
 
     const tweetLeft = 280 - text.length;
     return (
-      <div className='container'>
-        <NavBar/>
+      <div>
         <h3 className="center">Compose new Tweet</h3>
         <form className='new-tweet' onSubmit={this.handleSubmit} >
           <textarea

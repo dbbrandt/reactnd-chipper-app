@@ -27,7 +27,7 @@ const tweets = (state = {}, action) => {
         replyingTo = {
           [parent.id]: {
             ...parent,
-            replies: parent.replys.concat([tweet.id])
+            replies: parent.replies.concat([tweet.id])
           }
         }
       }

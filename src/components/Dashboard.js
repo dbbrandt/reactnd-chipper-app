@@ -8,8 +8,7 @@ class Dashboard extends Component {
   render() {
     const { tweetIds } = this.props;
     return (
-      <div className='container'>
-        <NavBar/>
+      <div>
         <h3 className="center">Your Timeline</h3>
         <TweetList tweetIds={tweetIds}/>
       </div>
@@ -19,7 +18,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = ({ tweets }) => ({
   tweetIds: Object.keys(tweets).sort(
-    (a, b) => tweets[a].timeStamp - tweets[b].timeStamp
+    (a, b) => tweets[b].timestamp - tweets[a].timestamp
   )
 });
 
