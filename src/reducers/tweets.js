@@ -1,4 +1,4 @@
-import { RECEIVE_TWEETS, TOGGLE_TWEET, NEW_TWEET } from "../actions/tweets";
+import { RECEIVE_TWEETS, TOGGLE_TWEET, ADD_TWEET } from "../actions/tweets";
 
 const tweets = (state = {}, action) => {
   switch (action.type) {
@@ -19,21 +19,23 @@ const tweets = (state = {}, action) => {
             state[action.id].likes.concat([action.authedUser])
         }
       };
-    case NEW_TWEET:
-      const { replyingTo } = action.tweet;
-      const replyTweet = replyingTo ? state[replyingTo] : null;
-      console.log('reducer NEW_TWEET: tweet :', action.tweet);
-      console.log('reducer NEW_TWEET: replyTweet :', replyTweet);
-      return  replyTweet === null ? {
-        ...state,
-        [action.tweet.id]: {...action.tweet}
-      } : {
-        ...state,
-        [action.tweet.id]: {...action.tweet},
-        [replyTweet.id]: {
-          ...replyTweet,
-          replys: replyTweet.replys.concat(replyingTo)
+    case ADD_TWEET:
+      const { tweet } = action;
+      let replyingTo = {};
+      if (tweet.replyingTo !== null ) {
+        const parent = state[tweet.replyingTo];
+        replyingTo = {
+          [parent.id]: {
+            ...parent,
+            replies: parent.replys.concat([tweet.id])
+          }
         }
+      }
+
+      return {
+        ...state,
+        [action.tweet.id]: action.tweet,
+        ...replyingTo
       };
     default:
       return state;

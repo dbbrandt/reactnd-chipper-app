@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { handleNewTweet } from "../actions/tweets";
+import { handleAddTweet } from "../actions/tweets";
 import NavBar from "./NavBar";
 
 class NewTweet extends Component {
@@ -16,11 +16,9 @@ class NewTweet extends Component {
   };
 
   handleSubmit = (event) => {
-    const { author, replyingTo } = this.props;
-    const { text } = this.state;
+    const { dispatch, id} = this.props;
     event.preventDefault();
-    console.log('handSubmit: ', author);
-    this.props.dispatch(handleNewTweet( text, author, replyingTo ));
+    dispatch(handleAddTweet( this.state.text, id ));
     this.setState({
       text: ''
     })
@@ -59,9 +57,5 @@ class NewTweet extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser, tweets }, { id }) => ({
-  author: authedUser,
-  replyingTo: tweets[id]
-});
 
-export default connect(mapStateToProps)(NewTweet);
+export default connect()(NewTweet);
