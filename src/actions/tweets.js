@@ -1,32 +1,39 @@
 import { saveLikeToggle, saveTweet } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading";
+import { createAction } from "@reduxjs/toolkit";
 
-export const RECEIVE_TWEETS = "RECEIVE_TWEETS";
-export const TOGGLE_TWEET = "TOGGLE_TWEET";
-export const ADD_TWEET = "ADD_TWEET";
+// export const RECEIVE_TWEETS = "RECEIVE_TWEETS";
+// export const TOGGLE_TWEET = "TOGGLE_TWEET";
+// export const ADD_TWEET = "ADD_TWEET";
+//
+// export const receiveTweets = tweets => ({
+//   type: RECEIVE_TWEETS,
+//   tweets
+// });
+//
+// const toggleTweet = (id, authedUser, hasLiked) => ({
+//   type: TOGGLE_TWEET,
+//   id,
+//   authedUser,
+//   hasLiked
+// });
+//
+// const addTweet = tweet => ({
+//   type: ADD_TWEET,
+//   tweet
+// });
 
-export const receiveTweets = tweets => ({
-  type: RECEIVE_TWEETS,
-  tweets
-});
+export const receiveTweets = createAction('RECEIVE_TWEETS');
 
-const toggleTweet = (id, authedUser, hasLiked) => ({
-  type: TOGGLE_TWEET,
-  id,
-  authedUser,
-  hasLiked
-});
+export const toggleTweet = createAction('TOGGLE_TWEET');
 
-const addTweet = tweet => ({
-  type: ADD_TWEET,
-  tweet
-});
+export const addTweet = createAction('ADD_TWEET') ;
 
-export function handleToggleTweet(id, authedUser, hasLiked) {
+export function handleToggleTweet(info) {
   return dispatch => {
-    dispatch(toggleTweet(id, authedUser, hasLiked));
-    saveLikeToggle({ id, authedUser, hasLiked }).catch(e => {
-      dispatch(toggleTweet(id, authedUser, hasLiked));
+    dispatch(toggleTweet(info));
+    saveLikeToggle(info).catch(e => {
+      dispatch(toggleTweet(info));
       console.warn("Error in handleToggleTweet: ", e);
       alert("There was an error liking the tweet. Try again.");
     });

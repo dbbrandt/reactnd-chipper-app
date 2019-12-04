@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { handleAddTweet } from "../actions/tweets";
-import NavBar from "./NavBar";
 
 class NewTweet extends Component {
   state = {
@@ -26,8 +25,6 @@ class NewTweet extends Component {
 
   render() {
     const { text } = this.state;
-    {/* redirect to the home view if submitted */}
-
     const tweetLeft = 280 - text.length;
     return (
       <div>

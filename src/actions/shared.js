@@ -11,9 +11,9 @@ export const handleGetInitialData = () => {
     dispatch(showLoading());
     return getInitialData().then(({ tweets, users }) => {
       console.log("Handling getInitialData");
-      dispatch(receiveTweets(tweets));
-      dispatch(receiveUsers(users));
       dispatch(setAuthedUser(AUTHED_ID));
+      dispatch(receiveUsers(users));
+      dispatch(receiveTweets(tweets));
       dispatch(hideLoading());
     });
   };

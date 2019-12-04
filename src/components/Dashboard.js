@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import NavBar from "./NavBar";
 import TweetList from "./TweetList";
 // import { Route, Router } from "react-router-dom";
 
