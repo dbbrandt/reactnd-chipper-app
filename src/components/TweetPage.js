@@ -20,16 +20,13 @@ class TweetPage extends Component {
 
 const mapStateToProps = ({ tweets }, { match }) => {
   const id = match.params.id;
-  const res = {
+  return {
     id,
     tweetIds: !tweets[id] ?
       []
       :
       tweets[id].replies.sort((a,b) => tweets[b].timestamp - tweets[a].timestamp)
   };
-  console.log("TweetPage ids: ", tweets[id].replies);
-  console.log("TweetPage sorted ids: ", res.tweetIds);
-  return res;
 };
 
 export default connect(mapStateToProps)(TweetPage);
