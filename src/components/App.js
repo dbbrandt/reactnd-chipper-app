@@ -23,7 +23,7 @@ class App extends Component {
           :
           <Router>
             <div className='container'>
-              <NavBar location={() => useLocation()}/>
+              <NavBar getLocation={() => useLocation()}/>
               <Route exact path='/' component={Dashboard}/>
               <Route path='/new' component={NewTweet}/>
               <Route path='/tweet/:id' component={TweetPage}/>

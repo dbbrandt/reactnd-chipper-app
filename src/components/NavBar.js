@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = props => {
-  const location = props.location().pathname;
+  const location = props.getLocation().pathname;
   return (
     <div className="nav">
       <ul>
