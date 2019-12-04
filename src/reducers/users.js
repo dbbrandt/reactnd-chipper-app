@@ -18,7 +18,7 @@ import { receiveUsers} from "../actions/users";
 import { createReducer} from "@reduxjs/toolkit";
 
 const users = createReducer({}, {
-  [receiveUsers]: (state, action) => ({...state, ...action.payload})
+  [receiveUsers]: (state, action) => (action.payload)
 });
 
 export default users;
