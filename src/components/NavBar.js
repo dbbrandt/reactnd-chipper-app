@@ -1,18 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-class NavBar extends Component {
-  render() {
-    return (
-      <div className="nav">
-        <ul>
-          <li>Home</li>
-          <li>New Tweet</li>
-        </ul>
-      </div>
-    );
-  }
-}
+const NavBar = props => {
+  const location = props.location().pathname;
+  return (
+    <div className="nav">
+      <ul>
+        <li className={location === "/" ? "active" : ""}>
+          <Link to="/">Home</Link>
+        </li>
+        <li className={location === "/new" ? "active" : ""}>
+          <Link to="/new">New Tweet</Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
 export default NavBar;
-
-

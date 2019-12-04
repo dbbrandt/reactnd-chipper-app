@@ -1,26 +1,27 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { handleAddTweet } from "../actions/tweets";
 
 class NewTweet extends Component {
   state = {
-    text: ''
+    text: ""
   };
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       text: event.target.value
-    })
-
+    });
   };
 
-  handleSubmit = (event) => {
-    const { dispatch, id} = this.props;
+  handleSubmit = event => {
+    const { dispatch, id, history } = this.props;
     event.preventDefault();
-    dispatch(handleAddTweet( this.state.text, id ));
-    this.setState({
-      text: ''
-    })
+    dispatch(handleAddTweet(this.state.text, id));
+    id == null
+      ? history.push("/")
+      : this.setState({
+          text: ""
+        });
   };
 
   render() {
@@ -29,7 +30,7 @@ class NewTweet extends Component {
     return (
       <div>
         <h3 className="center">Compose new Tweet</h3>
-        <form className='new-tweet' onSubmit={this.handleSubmit} >
+        <form className="new-tweet" onSubmit={this.handleSubmit}>
           <textarea
             className="textarea"
             placeholder="What's happening?"
@@ -37,14 +38,8 @@ class NewTweet extends Component {
             onChange={this.handleChange}
             maxLength={280}
           />
-          {tweetLeft <= 100 &&
-            <div className='tweet-length'>{tweetLeft}</div>
-          }
-          <button
-            className='btn'
-            type='submit'
-            disabled={!text}
-          >
+          {tweetLeft <= 100 && <div className="tweet-length">{tweetLeft}</div>}
+          <button className="btn" type="submit" disabled={!text}>
             SUBMIT
           </button>
         </form>
@@ -52,6 +47,5 @@ class NewTweet extends Component {
     );
   }
 }
-
 
 export default connect()(NewTweet);

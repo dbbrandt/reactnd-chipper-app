@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import TweetList from "./TweetList";
-// import { Route, Router } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {

@@ -5,7 +5,7 @@ import Dashboard from "./Dashboard";
 import NewTweet from "./NewTweet";
 import TweetPage from "./TweetPage";
 import LoadingBar from "react-redux-loading";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
           :
           <Router>
             <div className='container'>
-              <NavBar/>
+              <NavBar location={() => useLocation()}/>
               <Route exact path='/' component={Dashboard}/>
               <Route path='/new' component={NewTweet}/>
               <Route path='/tweet/:id' component={TweetPage}/>
@@ -35,9 +35,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, location }) {
   return {
-    loading: authedUser === null
+    loading: authedUser === null,
+    location
   };
 }
 
