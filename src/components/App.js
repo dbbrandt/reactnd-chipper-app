@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { handleGetInitialData } from "../actions/shared";
 import Dashboard from "./Dashboard";
@@ -16,26 +16,26 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <LoadingBar />
-        {this.props.loading === true
-          ? null
-          :
-          <Router>
-            <div className='container'>
-              <NavBar getLocation={() => useLocation()}/>
-              <Route exact path='/' component={Dashboard}/>
-              <Route path='/new' component={NewTweet}/>
-              <Route path='/tweet/:id' component={TweetPage}/>
-            </div>
-          </Router>
-        }
-      </div>
+      <Router>
+        <Fragment>
+          <LoadingBar />
+          <div className="container">
+            <NavBar />
+            {this.props.loading === true ? null : (
+              <div>
+                <Route exact path="/" component={Dashboard} />
+                <Route path="/new" component={NewTweet} />
+                <Route path="/tweet/:id" component={TweetPage} />
+              </div>
+            )}
+          </div>
+        </Fragment>
+      </Router>
     );
   }
 }
 
-function mapStateToProps({ authedUser, location }) {
+function mapStateToProps({ authedUser, tweets,  location }) {
   return {
     loading: authedUser === null,
     location

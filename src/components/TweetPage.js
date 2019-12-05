@@ -25,7 +25,7 @@ const mapStateToProps = ({ tweets }, { match }) => {
     tweetIds: !tweets[id] ?
       []
       :
-      tweets[id].replies.sort((a,b) => tweets[b].timestamp - tweets[a].timestamp)
+      Object.keys(tweets).sort((a, b) => tweets[b].timestamp - tweets[a].timestamp)
   };
 };
 

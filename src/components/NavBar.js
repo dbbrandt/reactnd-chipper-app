@@ -1,16 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavBar = props => {
-  const location = props.getLocation().pathname;
   return (
     <div className="nav">
       <ul>
-        <li className={location === "/" ? "active" : ""}>
-          <Link to="/">Home</Link>
+        <li>
+          <NavLink to="/" exact activeClassName='active'>Home</NavLink>
         </li>
-        <li className={location === "/new" ? "active" : ""}>
-          <Link to="/new">New Tweet</Link>
+        <li>
+          <NavLink to="/new" activeClassName='active'>New Tweet</NavLink>
         </li>
       </ul>
     </div>
